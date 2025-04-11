@@ -1,16 +1,27 @@
 FROM php:8.1-cli
 
-# Definir o diretório de trabalho no container
+# Instala dependências do sistema
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zlib1g-dev \
+    libzip-dev \
+    && docker-php-ext-install zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instala o Composer
+RUN curl -sS https://getcomposer.org/installer | php -- \
+    --install-dir=/usr/local/bin --filename=composer
+
+# Configura o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copiar o código fonte para dentro do container
+# Copia os arquivos do projeto
 COPY . .
 
-# Instalar dependências, se necessário (por exemplo, se usar o Composer)
-# RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-#     php composer-setup.php && \
-#     php -r "unlink('composer-setup.php');" && \
-#     php composer.phar install
+# Instala as dependências
+RUN composer install --prefer-dist --no-interaction
 
-# Rodar o servidor PHP embutido para manter o container ativo
-CMD ["php", "-S", "0.0.0.0:3000", "index.php"]
+# Comando padrão
+CMD ["php", "index.php", "1000000"]

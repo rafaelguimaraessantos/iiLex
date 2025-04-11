@@ -21,6 +21,15 @@ Este projeto usa o Docker para facilitar o ambiente de desenvolvimento. Para rod
 
 Na raiz do projeto, rode o seguinte comando para construir a imagem Docker e iniciar os containers:
 
+
 ```bash
 docker-compose up --build
 docker compose up -d
+docker exec -it ilex-app bash 
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+apt-get update && apt-get install -y git unzip zlib1g-dev libzip-dev
+docker-php-ext-install zip
+composer install --prefer-dist
+
+para rodar basta abrir navegador e colocar http://localhost:3000/
+para rodar teste basta acessar o container docker exec -it ilex-app bash  e digitar ./vendor/bin/phpunit testes/ 
