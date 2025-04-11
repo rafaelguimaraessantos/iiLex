@@ -1,0 +1,36 @@
+# Ignorar arquivos do MySQL
+*.frm
+*.myd
+*.myi
+
+# Ignorar diretórios e arquivos de log do MySQL
+/mysql/
+*.log
+
+# Ignorar arquivos temporários do PHP
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignorar arquivos de cache do Composer
+/vendor/
+composer.lock
+
+# Ignorar diretórios de cache de IDEs
+.idea/
+.vscode/
+
+# Ignorar arquivos de build e compilação
+/dist/
+/build/
+
+# Ignorar arquivos de configuração locais
+.env
+
+# Ignorar arquivos gerados por sistemas operacionais
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de backup
+*~
